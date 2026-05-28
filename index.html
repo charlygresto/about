@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charly Resto | Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0f1d;
+            --bg-secondary: #111827;
+            --accent: #3b82f6;
+            --accent-green: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --terminal-bg: #05070f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 15, 29, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h2 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .contact-pill-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .pill {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pill i {
+            color: var(--accent);
+        }
+
+        /* Interactive Terminal */
+        .terminal-container {
+            background: var(--terminal-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal-header {
+            background: #1e293b;
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #eab308; }
+        .dot-green { background: #22c55e; }
+        
+        .terminal-title {
+            margin-left: auto;
+            margin-right: auto;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-y: auto;
+            flex-grow: 1;
+            font-size: 0.9rem;
+        }
+
+        .term-output {
+            color: var(--text-main);
+            white-space: pre-wrap;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .term-prompt {
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .term-input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            outline: none;
+            flex-grow: 1;
+        }
+
+        /* Main Sections Container */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            scroll-margin-top: 6rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            height: 2px;
+            background: var(--accent);
+            flex-grow: 1;
+            max-width: 150px;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 3.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border: 4px solid var(--bg-primary);
+            border-radius: 50%;
+            left: 13px;
+            top: 6px;
+            z-index: 2;
+        }
+
+        .timeline-date {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .timeline-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-card h4 {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-card ul {
+            list-style: none;
+        }
+
+        .timeline-card li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Interactive Skills Dashboard */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .skill-bar-bg {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0;
+            transition: width 1.5s ease-out;
+            border-radius: 10px;
+        }
+
+        /* Education & More Grid */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .edu-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .lang-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--terminal-bg);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 968px) {
+            .hero-grid, .meta-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            header {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">CHARLY<span>.RESTO()</span></div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <h1>Hi, I'm Charly</h1>
+                <h2>IT Analyst & Power Platform Developer</h2>
+                <p>IT professional experienced in technical support, system optimization, and team coordination. Skilled in Microsoft 365 and Power Platform, creating workflows, apps, and reports to improve productivity.</p>
+                
+                <div class="contact-pill-box">
+                    <div class="pill"><i class="fas fa-map-marker-alt"></i> Beirut, Lebanon</div>
+                    <div class="pill"><i class="fas fa-envelope"></i> charlygresto@hotmail.com</div>
+                    <div class="pill"><i class="fas fa-phone-alt"></i> +961 70202183</div>
+                    <div class="pill"><i class="fas fa-user"></i> Lebanese | Male | Single</div>
+                </div>
+            </div>
+
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <div class="terminal-title">bash - charly@portfolio</div>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                    <div class="term-output">Welcome to Charly's interactive resume system.</div>
+                    <div class="term-output">Type <span style="color: var(--accent);">help</span> to view available system commands.</div>
+                    <div class="term-prompt">
+                        <span>charly_system~$:</span>
+                        <input type="text" class="term-input" id="terminalInput" autofocus autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        
+        <section id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">April 2025 - Present</div>
+                    <div class="timeline-card">
+                        <h3>IT Analyst</h3>
+                        <h4>AAI | Dubai (Remote)</h4>
+                        <ul>
+                            <li>Design and develop Power Apps (canvas apps, model-driven apps) to automate business processes and improve internal workflows.</li>
+                            <li>Build and maintain Power Automate flows including scheduled, automated, and HTTP-triggered flows integrated with Microsoft 365.</li>
+                            <li>Create Power BI dashboards and reports with DAX measures for SLA tracking, mailbox usage, and operational KPIs.</li>
+                            <li>Integrate Power Platform solutions with SharePoint, Teams, Azure AD, and Microsoft Graph API.</li>
+                            <li>Develop React-based internal tools and web interfaces to support IT operations and reporting.</li>
+                            <li>Manage Azure Blob Storage and automate file archiving pipelines using PowerShell and AzCopy.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Dec 2020 - April 2025</div>
+                    <div class="timeline-card">
+                        <h3>Power Platform Developer - IT Analyst</h3>
+                        <h4>Arcenciel | Jisr El Bacha</h4>
+                        <ul>
+                            <li>Led a team of 4 IT specialists supporting 300 employees across 9 sites.</li>
+                            <li>Improved IT infrastructure, reducing downtime by 20% and boosting efficiency.</li>
+                            <li>Implemented strong security protocols, maintaining zero breaches for 3 years.</li>
+                            <li>Managed full IT project lifecycles, delivering on time and within budget.</li>
+                            <li>Provided staff training to improve skills and align with best practices.</li>
+                            <li>Collaborated with departments to implement tech solutions that support business goals.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Jan 2016 - Feb 2019</div>
+                    <div class="timeline-card">
+                        <h3>IT Support</h3>
+                        <h4>Technical Field Ops</h4>
+                        <ul>
+                            <li>Strong at troubleshooting hardware, software, and network issues.</li>
+                            <li>Skilled in network setup and maintenance.</li>
+                            <li>Experienced in help desk management and user support.</li>
+                            <li>Proficient in incident management and fast system recovery.</li>
+                            <li>Expert in remote desktop support.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Core Competencies</h2>
+            <div class="skills-grid">
+                
+                <div class="skill-card" data-level="95">
+                    <div class="skill-info">
+                        <span class="skill-name"><i class="fab fa-windows" style="color:#0078d4;"></i> Power Apps / Automate</span>
+                        <span class="skill-pct">95%</span>
+                    </div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
+                </div>
+
+                <div class="skill-card" data-level="90">
+                    <div class="skill-info">
+                        <span class="skill-name"><i class="fas fa-chart-bar" style="color:#f2c811;"></i> Power BI / DAX</span>
+                        <span class="skill-pct">90%</span>
+                    </div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
+                </div>
+
+                <div class="skill-card" data-level="88">
+                    <div class="skill-info">
+                        <span class="skill-name"><i class="fas fa-share-alt" style="color:#0078d4;"></i> SharePoint Online</span>
+                        <span class="skill-pct">88%</span>
+                    </div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
+                </div>
+
+                <div class="skill-card" data-level="80">
+                    <div class="skill-info">
+                        <span class="skill-name"><i class="fab fa-react" style="color:#61dafb;"></i> React / Web Dev</span>
+                        <span class="skill-pct">80%</span>
+                    </div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
+                </div>
+
+                <div class="skill-card" data-level="85">
+                    <div class="skill-info">
+                        <span class="skill-name"><i class="fas fa-shield-alt" style="color:#ef4444;"></i> Network & iOS Security</span>
+                        <span class="skill-pct">85%</span>
+                    </div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
+                </div>
+
+                <div class="skill-card" data-level="78">
+                    <div class="skill-info">
+                        <span class="skill-name"><i class="fab fa-apple" style="color:#a3aaae;"></i> Xcode, Swift & SwiftUI</span>
+                        <span class="skill-pct">78%</span>
+                    </div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="meta-grid">
+            <section id="education">
+                <h2 class="section-title">Education</h2>
+                
+                <div class="edu-card">
+                    <h3>Diploma in Native Mobile App Development</h3>
+                    <p style="color: var(--accent); margin: 0.2rem 0;">NDU DCE Track | Formatech</p>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Graduated 2019</span>
+                    <p style="font-size:0.9rem; color: var(--text-muted); margin-top:0.5rem;">Covered native mobile app development for Android (Java) and iOS (Swift), cross-platform app development with PhoneGap (HTML5), and web development with HTML5, JavaScript, jQuery, and CSS. Windows app development using C#.</p>
+                </div>
+
+                <div class="edu-card">
+                    <h3>Certificate in PC Repair, Networking</h3>
+                    <p style="color: var(--accent); margin: 0.2rem 0;">C.IT Dora</p>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Graduated 2015</span>
+                </div>
+            </section>
+
+            <section id="languages">
+                <h2 class="section-title">Languages & Extras</h2>
+                <div class="lang-list">
+                    <div class="lang-item"><span>Arabic</span><strong style="color: var(--accent-green)">Native</strong></div>
+                    <div class="lang-item"><span>English</span><strong style="color: var(--accent)">Proficient</strong></div>
+                    <div class="lang-item"><span>French</span><strong style="color: var(--text-muted)">Good</strong></div>
+                    <div class="lang-item"><span>Spanish</span><strong style="color: #eab308">Beginner</strong></div>
+                </div>
+                <div style="margin-top: 2rem; background: var(--bg-secondary); padding: 1.5rem; border-radius:8px;">
+                    <h4 style="margin-bottom:0.5rem;"><i class="fas fa-heart" style="color: #ef4444;"></i> Hobbies & Interests</h4>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">Gaming, Football, Photography, Technology trends, Watching TV shows.</p>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Charly Resto. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Terminal Interaction Script Logic
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalBody = document.getElementById('terminalBody');
+
+        const commands = {
+            help: "Available commands:\n  [about]       - Brief career profile focus snapshot\n  [experience]  - Summarize corporate employment records\n  [skills]      - List core toolstack matrices\n  [education]   - Show academic credentials and tracks\n  [languages]   - Display verified speaking languages\n  [contact]     - View primary structural outreach channels\n  [clear]       - Refresh console viewport logs",
+            about: "Charly Resto - IT Analyst experienced in technical support, system optimization, and workflow automation. Skilled in Microsoft 365 and Power Platform setups to optimize productivity.",
+            experience: "Employment History Log:\n  • IT Analyst @ AAI (Dubai Remote) | April 2025 - Present\n  • Power Platform Dev / IT Analyst @ Arcenciel | Dec 2020 - April 2025\n  • IT Support @ Technical Field Ops | Jan 2016 - Feb 2019",
+            skills: "Primary Engineering Systems Registered:\n  • Microsoft Power Platform (Apps, Automate, BI, DAX)\n  • SharePoint Online, Teams, Azure AD & MS Graph API\n  • React-based Internal Tools & Powershell Core Scripting\n  • Mobile Engineering: Xcode, Swift, SwiftUI, Android Studio / Java",
+            education: "Academic Achievements Profile:\n  • Diploma in Native Mobile App Development (NDU DCE Track) | Formatech, 2019\n  • Certificate in PC Repair, Networking | C.IT Dora, 2015",
+            languages: "Verified Language Channels:\n  • Arabic  - Native Language\n  • English - Proficient Operator\n  • French  - Good Command\n  • Spanish - Beginner Level",
+            contact: "Direct Secure Communication Channels:\n  • Contact Email: charlygresto@hotmail.com\n  • Primary Mobile: +961 70202183\n  • Current Vector: Roumieh, Beirut, Lebanon",
+            clear: ""
+        };
+
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const rawVal = this.value.trim();
+                const cmd = rawVal.toLowerCase();
+                
+                if (cmd === '') return;
+
+                // Create Command Row Visual Element
+                const cmdRow = document.createElement('div');
+                cmdRow.className = 'term-output';
+                cmdRow.innerHTML = `<span style="color: var(--accent-green)">charly_system~$:</span> ${rawVal}`;
+                
+                // Process output values
+                const outputRow = document.createElement('div');
+                outputRow.className = 'term-output';
+
+                if (cmd === 'clear') {
+                    const prompts = terminalBody.querySelectorAll('.term-output');
+                    prompts.forEach(p => p.remove());
+                    this.value = '';
+                    return;
+                } else if (commands[cmd] !== undefined) {
+                    outputRow.innerText = commands[cmd];
+                } else {
+                    outputRow.innerHTML = `System command execution error: "${rawVal}" not found. Type <span style="color: var(--accent);">help</span>`;
+                }
+
+                // Append text neatly right before the active user input prompt line
+                const promptLine = terminalBody.querySelector('.term-prompt');
+                terminalBody.insertBefore(cmdRow, promptLine);
+                terminalBody.insertBefore(outputRow, promptLine);
+                
+                this.value = '';
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
+
+        // Skill Bar Animation Intersection Observer System
+        const skillCards = document.querySelectorAll('.skill-card');
+        const observerOptions = { threshold: 0.1, rootMargin: "0px" };
+
+        const skillObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const targetPct = entry.target.getAttribute('data-level');
+                    const targetFillBar = entry.target.querySelector('.skill-bar-fill');
+                    targetFillBar.style.width = `${targetPct}%`;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        skillCards.forEach(card => skillObserver.observe(card));
+
+        // Smooth Scroll Target Selection
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Dynamic Scrollspy Tracker
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section, header');
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollPos >= sectionTop - 180) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
