@@ -79,6 +79,25 @@
             color: var(--accent);
         }
 
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
         /* Hero Section */
         header {
             min-height: 100vh;
@@ -150,6 +169,7 @@
             height: 400px;
             display: flex;
             flex-direction: column;
+            width: 100%;
         }
 
         .terminal-header {
@@ -190,6 +210,7 @@
             white-space: pre-wrap;
             margin-bottom: 0.8rem;
             line-height: 1.4;
+            word-break: break-word;
         }
 
         .term-prompt {
@@ -197,6 +218,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .term-input {
@@ -207,6 +229,7 @@
             font-size: 0.9rem;
             outline: none;
             flex-grow: 1;
+            min-width: 100px;
         }
 
         /* Main Sections Container */
@@ -421,11 +444,90 @@
             .hero-grid, .meta-grid {
                 grid-template-columns: 1fr;
             }
+            .hero-grid {
+                gap: 2rem;
+            }
             .hero-text h1 {
                 font-size: 2.8rem;
             }
             header {
                 min-height: auto;
+                padding-top: 6rem;
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            section {
+                padding: 3.5rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            /* Hamburger Icon Display */
+            .menu-toggle {
+                display: flex;
+            }
+
+            /* Responsive Mobile Navigation Drawer */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 6rem 2rem 2rem 2rem;
+                gap: 2rem;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.mobile-active {
+                right: 0;
+            }
+
+            /* Hamburger Transformation Animations */
+            .menu-toggle.open span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            .menu-toggle.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.open span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            .hero-text h2 {
+                font-size: 1.4rem;
+            }
+            
+            .timeline::after {
+                left: 10px;
+            }
+            .timeline-item {
+                padding-left: 35px;
+            }
+            .timeline-dot {
+                left: 3px;
+            }
+            .timeline-card {
+                padding: 1.5rem;
+            }
+            
+            .terminal-container {
+                height: 350px;
+            }
+            .terminal-body {
+                padding: 1rem;
             }
         }
     </style>
@@ -435,7 +537,12 @@
     <nav>
         <div class="nav-container">
             <div class="logo">CHARLY<span>.RESTO()</span></div>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -632,6 +739,24 @@
     </footer>
 
     <script>
+        // Mobile Toggle Menu Logic Matrix
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinksContainer = document.getElementById('navLinks');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('open');
+            navLinksContainer.classList.toggle('mobile-active');
+        });
+
+        // Close menu panel when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('open');
+                navLinksContainer.classList.remove('mobile-active');
+            });
+        });
+
         // Terminal Interaction Script Logic
         const terminalInput = document.getElementById('terminalInput');
         const terminalBody = document.getElementById('terminalBody');
@@ -702,8 +827,6 @@
         skillCards.forEach(card => skillObserver.observe(card));
 
         // Smooth Scroll Target Selection
-        const navLinks = document.querySelectorAll('.nav-links a');
-
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
