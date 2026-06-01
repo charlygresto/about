@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charly Resto | Portfolio</title>
+    <meta name="description" content="Charly Resto — IT Analyst & Power Platform Developer based in Beirut. Microsoft 365, Power Apps, Power Automate, Power BI, SharePoint, and React.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0f1d'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' font-weight='bold' text-anchor='middle' fill='%233b82f6'%3EC%3C/text%3E%3C/svg%3E">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         :root {
@@ -384,6 +386,14 @@
             gap: 0.7rem;
         }
 
+        .skill-level {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .skill-bar-bg {
             height: 6px;
             background: rgba(255, 255, 255, 0.1);
@@ -556,13 +566,12 @@
             <div class="hero-text">
                 <h1>Hi, I'm Charly</h1>
                 <h2>IT Analyst & Power Platform Developer</h2>
-                <p>IT professional experienced in technical support, system optimization, and team coordination. Skilled in Microsoft 365 and Power Platform, creating workflows, apps, and reports to improve productivity.</p>
+                <p>Developer by passion, IT Analyst by profession. I build Power Apps, Power Automate flows, Power BI dashboards, and React-based tools that automate real business workflows — all integrated with Microsoft 365, SharePoint, and the Graph API. Grounded in years of IT support and infrastructure leadership.</p>
                 
                 <div class="contact-pill-box">
                     <div class="pill"><i class="fas fa-map-marker-alt"></i> Beirut, Lebanon</div>
                     <div class="pill"><i class="fas fa-envelope"></i> charlygresto@hotmail.com</div>
                     <div class="pill"><i class="fas fa-phone-alt"></i> +961 70202183</div>
-                    <div class="pill"><i class="fas fa-user"></i> Lebanese | Male | Single</div>
                 </div>
             </div>
 
@@ -651,7 +660,7 @@
                 <div class="skill-card" data-level="95">
                     <div class="skill-info">
                         <span class="skill-name"><i class="fab fa-windows" style="color:#0078d4;"></i> Power Apps / Automate</span>
-                        <span class="skill-pct">95%</span>
+                        <span class="skill-level">Expert</span>
                     </div>
                     <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
                 </div>
@@ -659,7 +668,7 @@
                 <div class="skill-card" data-level="90">
                     <div class="skill-info">
                         <span class="skill-name"><i class="fas fa-chart-bar" style="color:#f2c811;"></i> Power BI / DAX</span>
-                        <span class="skill-pct">90%</span>
+                        <span class="skill-level">Expert</span>
                     </div>
                     <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
                 </div>
@@ -667,7 +676,7 @@
                 <div class="skill-card" data-level="88">
                     <div class="skill-info">
                         <span class="skill-name"><i class="fas fa-share-alt" style="color:#0078d4;"></i> SharePoint Online</span>
-                        <span class="skill-pct">88%</span>
+                        <span class="skill-level">Advanced</span>
                     </div>
                     <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
                 </div>
@@ -675,7 +684,7 @@
                 <div class="skill-card" data-level="80">
                     <div class="skill-info">
                         <span class="skill-name"><i class="fab fa-react" style="color:#61dafb;"></i> React / Web Dev</span>
-                        <span class="skill-pct">80%</span>
+                        <span class="skill-level">Advanced</span>
                     </div>
                     <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
                 </div>
@@ -683,7 +692,7 @@
                 <div class="skill-card" data-level="85">
                     <div class="skill-info">
                         <span class="skill-name"><i class="fas fa-shield-alt" style="color:#ef4444;"></i> Network & iOS Security</span>
-                        <span class="skill-pct">85%</span>
+                        <span class="skill-level">Advanced</span>
                     </div>
                     <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
                 </div>
@@ -691,7 +700,7 @@
                 <div class="skill-card" data-level="78">
                     <div class="skill-info">
                         <span class="skill-name"><i class="fab fa-apple" style="color:#a3aaae;"></i> Xcode, Swift & SwiftUI</span>
-                        <span class="skill-pct">78%</span>
+                        <span class="skill-level">Proficient</span>
                     </div>
                     <div class="skill-bar-bg"><div class="skill-bar-fill"></div></div>
                 </div>
@@ -763,8 +772,8 @@
 
         const commands = {
             help: "Available commands:\n  [about]       - Brief career profile focus snapshot\n  [experience]  - Summarize corporate employment records\n  [skills]      - List core toolstack matrices\n  [education]   - Show academic credentials and tracks\n  [languages]   - Display verified speaking languages\n  [contact]     - View primary structural outreach channels\n  [clear]       - Refresh console viewport logs",
-            about: "Charly Resto - IT Analyst experienced in technical support, system optimization, and workflow automation. Skilled in Microsoft 365 and Power Platform setups to optimize productivity.",
-            experience: "Employment History Log:\n  • IT Analyst @ AAI (Dubai Remote) | April 2025 - Present\n  • Power Platform Dev / IT Analyst @ Arcenciel | Dec 2020 - April 2025\n  • IT Support @ Technical Field Ops | Jan 2016 - Feb 2019",
+            about: "Charly Resto - Developer by passion, IT Analyst by profession. I build Power Apps, Power Automate flows, Power BI dashboards, and React-based tools that automate real business workflows, all integrated with Microsoft 365, SharePoint, and the Graph API. Grounded in years of IT support and infrastructure leadership.",
+            experience: "Employment History Log:\n  • IT Analyst @ AAI (Dubai Remote) | April 2025 - Present\n  • Power Platform Dev / IT Administrator @ Arcenciel | Dec 2020 - April 2025\n  • IT Support @ Arcenciel | Jan 2016 - Feb 2019",
             skills: "Primary Engineering Systems Registered:\n  • Microsoft Power Platform (Apps, Automate, BI, DAX)\n  • SharePoint Online, Teams, Azure AD & MS Graph API\n  • React-based Internal Tools & Powershell Core Scripting\n  • Mobile Engineering: Xcode, Swift, SwiftUI, Android Studio / Java",
             education: "Academic Achievements Profile:\n  • Diploma in Native Mobile App Development (NDU DCE Track) | Formatech, 2019\n  • Certificate in PC Repair, Networking | C.IT Dora, 2015",
             languages: "Verified Language Channels:\n  • Arabic  - Native Language\n  • English - Proficient Operator\n  • French  - Good Command\n  • Spanish - Beginner Level",
