@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charly Resto | Portfolio</title>
+    <meta name="description" content="Charly Resto — IT Analyst and Power Platform & Azure Developer based in Beirut. Power Apps, Power Automate, Power BI, Azure DevOps, React/TypeScript and Node.js.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0f1d'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' font-weight='bold' text-anchor='middle' fill='%233b82f6'%3EC%3C/text%3E%3C/svg%3E">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0f1d;
+            --bg-secondary: #111827;
+            --accent: #3b82f6;
+            --accent-green: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --terminal-bg: #05070f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 15, 29, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h2 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 520px;
+        }
+
+        .contact-pill-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .pill {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        a.pill:hover {
+            border-color: var(--accent);
+            color: var(--text-main);
+        }
+
+        .pill i {
+            color: var(--accent);
+        }
+
+        /* Interactive Terminal */
+        .terminal-container {
+            background: var(--terminal-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .terminal-header {
+            background: #1e293b;
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #eab308; }
+        .dot-green { background: #22c55e; }
+
+        .terminal-title {
+            margin-left: auto;
+            margin-right: auto;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-y: auto;
+            flex-grow: 1;
+            font-size: 0.9rem;
+        }
+
+        .term-output {
+            color: var(--text-main);
+            white-space: pre-wrap;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .term-prompt {
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .term-input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            outline: none;
+            flex-grow: 1;
+            min-width: 100px;
+        }
+
+        /* Main Sections Container */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            scroll-margin-top: 6rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            height: 2px;
+            background: var(--accent);
+            flex-grow: 1;
+            max-width: 150px;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 3.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border: 4px solid var(--bg-primary);
+            border-radius: 50%;
+            left: 13px;
+            top: 6px;
+            z-index: 2;
+        }
+
+        .timeline-date {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .timeline-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-card h4 {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-card ul, .project-card ul {
+            list-style: none;
+        }
+
+        .timeline-card li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .timeline-card li strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Skills Groups */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-color: var(--accent);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.25rem 0.7rem;
+            border-radius: 50px;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            padding: 1.8rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-top: 3px solid var(--accent);
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .project-card h3 {
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .project-card h3 i {
+            color: var(--accent);
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        /* Education & More Grid */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .edu-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .edu-card.in-progress {
+            border-left-color: var(--accent-green);
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+            padding: 0.1rem 0.6rem;
+            border-radius: 50px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .lang-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--terminal-bg);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 968px) {
+            .hero-grid, .meta-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-grid {
+                gap: 2rem;
+            }
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            header {
+                min-height: auto;
+                padding-top: 6rem;
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            section {
+                padding: 3.5rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 6rem 2rem 2rem 2rem;
+                gap: 2rem;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.mobile-active {
+                right: 0;
+            }
+
+            .menu-toggle.open span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            .menu-toggle.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.open span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            .hero-text h2 {
+                font-size: 1.4rem;
+            }
+
+            .timeline::after {
+                left: 10px;
+            }
+            .timeline-item {
+                padding-left: 35px;
+            }
+            .timeline-dot {
+                left: 3px;
+            }
+            .timeline-card, .project-card {
+                padding: 1.5rem;
+            }
+
+            .skills-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .terminal-container {
+                height: 350px;
+            }
+            .terminal-body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">CHARLY<span>.RESTO()</span></div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <h1>Hi, I'm Charly</h1>
+                <h2>IT Analyst · Power Platform &amp; Azure Developer</h2>
+                <p>IT Analyst with 10 years in IT, moving from support and infrastructure leadership into building business software. I build Power Platform solutions, Azure infrastructure and React/TypeScript web apps that automate workflows for a multi-branch insurance brokerage across the UAE and MENA. Studying for CII insurance qualifications to pair technical work with domain knowledge.</p>
+
+                <div class="contact-pill-box">
+                    <div class="pill"><i class="fas fa-map-marker-alt"></i> Beirut, Lebanon (remote)</div>
+                    <a class="pill" href="mailto:charlygresto@hotmail.com"><i class="fas fa-envelope"></i> charlygresto@hotmail.com</a>
+                    <a class="pill" href="tel:+96170202183"><i class="fas fa-phone-alt"></i> +961 70 202 183</a>
+                </div>
+            </div>
+
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <div class="terminal-title">bash - charly@portfolio</div>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                    <div class="term-output">Welcome to Charly's interactive resume system.</div>
+                    <div class="term-output">Type <span style="color: var(--accent);">help</span> to view available commands.</div>
+                    <div class="term-prompt">
+                        <span>charly_system~$:</span>
+                        <input type="text" class="term-input" id="terminalInput" autofocus autocomplete="off" aria-label="Terminal input">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+
+        <section id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">April 2025 - Present</div>
+                    <div class="timeline-card">
+                        <h3>IT Analyst</h3>
+                        <h4>Associated Alliance Insurance (AAI) | Dubai (Remote)</h4>
+                        <ul>
+                            <li>Rebuilding Power Apps as <strong>React/TypeScript</strong> web apps with Node.js APIs, Azure SQL and Entra ID SSO, including a multi-tenant user provisioning app and a medical claims portal.</li>
+                            <li>Built a reusable <strong>Azure DevOps</strong> project template (Bicep/AVM) for Container Apps with PostgreSQL, Key Vault, managed identities and private networking.</li>
+                            <li>Wrote a PowerShell scaffolding tool that generates React/Azure projects with infrastructure and multi-stage YAML pipelines, deploying live to UAE North.</li>
+                            <li>Built an <strong>AI news digest</strong> in Power Automate that researches regulatory news across 9 MENA countries using Claude on Microsoft Foundry and emails a formatted brief each weekday.</li>
+                            <li>Designed an <strong>email SLA tracking</strong> system (Power Automate, SharePoint, Office Scripts) that calculates working-hour response times with holiday exclusion, reported in Power BI.</li>
+                            <li>Built Power BI dashboards and DAX measures for SLA, mailbox usage and KPIs, fed monthly from the Microsoft Graph API.</li>
+                            <li>Automated database backups through a private-endpoint jump box (PowerShell, Python, Key Vault) and built Azure DevOps backup/restore tooling.</li>
+                            <li>Wrote Python scripts to de-duplicate and reorganise an <strong>18 TB</strong> network share, and a PowerShell/AzCopy pipeline that archives files to Azure Blob Storage.</li>
+                            <li>Built a PST-to-Excel export tool that processed about <strong>4,400 emails and 20,000 attachments in 5 minutes</strong>.</li>
+                            <li>Built Power Apps for leave requests (working-day calculation, manager approvals) and warranty workflows for a client in the automotive sector.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Dec 2020 - April 2025</div>
+                    <div class="timeline-card">
+                        <h3>Power Platform Developer &amp; IT Administrator</h3>
+                        <h4>Arcenciel | Jisr El Bacha</h4>
+                        <ul>
+                            <li>Led a team of <strong>4 IT specialists</strong> supporting <strong>300 staff across 9 sites</strong>.</li>
+                            <li>Cut downtime by <strong>20%</strong> through infrastructure upgrades.</li>
+                            <li>Kept a record of <strong>zero security breaches over 3 years</strong>.</li>
+                            <li>Delivered IT projects end to end, on time and within budget, and began automating processes with Power Platform.</li>
+                            <li>Trained staff and worked with departments to choose and roll out technology.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Jan 2016 - Feb 2019</div>
+                    <div class="timeline-card">
+                        <h3>IT Support</h3>
+                        <h4>Arcenciel | Jisr El Bacha</h4>
+                        <ul>
+                            <li>Resolved hardware, software and network issues, on site and through remote desktop.</li>
+                            <li>Set up and maintained networks and ran the help desk.</li>
+                            <li>Handled incident response and fast system recovery.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="projects-grid">
+
+                <div class="project-card">
+                    <h3><i class="fas fa-user-shield"></i> User Provisioning Web App</h3>
+                    <p>Replaces a Power App with a React/TypeScript front end, an Azure SQL backend and Entra ID SSO across three tenants. Approval routes are set per entity, and IT creates accounts in the right tenant from the app.</p>
+                    <div class="tag-list"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Azure SQL</span><span class="tag">Entra ID</span><span class="tag">Graph API</span></div>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-file-medical"></i> Medical Claims Portal</h3>
+                    <p>A public claim form with document uploads to Blob Storage and SSO sign-in for staff, rebuilt from a Power App in React/TypeScript on Azure SQL.</p>
+                    <div class="tag-list"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Azure SQL</span><span class="tag">Blob Storage</span></div>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-newspaper"></i> AI Regulatory News Digest</h3>
+                    <p>A two-stage LLM pipeline: per-country research with web search across 9 MENA countries, then assembly into an HTML email. Runs on Entra ID auth with no API keys.</p>
+                    <div class="tag-list"><span class="tag">Power Automate</span><span class="tag">Microsoft Foundry</span><span class="tag">Claude</span><span class="tag">SharePoint</span></div>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-cubes"></i> Azure Project Scaffolding</h3>
+                    <p>A PowerShell tool and DevOps template that generate React/Azure projects with Bicep infrastructure and multi-stage pipelines, including Container Apps with private networking.</p>
+                    <div class="tag-list"><span class="tag">PowerShell</span><span class="tag">Bicep</span><span class="tag">Azure DevOps</span><span class="tag">Container Apps</span></div>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-stopwatch"></i> Email SLA Tracking</h3>
+                    <p>Monitor and calculator flows that log external emails, detect staff replies and compute working-hour response times with holiday exclusion, reported in Power BI.</p>
+                    <div class="tag-list"><span class="tag">Power Automate</span><span class="tag">Office Scripts</span><span class="tag">Power BI</span><span class="tag">DAX</span></div>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-database"></i> Unified Client Data Search (Design)</h3>
+                    <p>Architecture and specs for searching across 9 branch SQL databases, Dynamics 365 CRM, Business Central and Moody's Orbis.</p>
+                    <div class="tag-list"><span class="tag">SQL Server</span><span class="tag">Dynamics 365</span><span class="tag">Architecture</span></div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Core Competencies</h2>
+            <div class="skills-grid">
+
+                <div class="skill-card">
+                    <div class="skill-name"><i class="fab fa-windows" style="color:#0078d4;"></i> Power Platform</div>
+                    <div class="tag-list"><span class="tag">Power Apps (canvas, model-driven)</span><span class="tag">Power Automate</span><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Fx</span><span class="tag">Office Scripts</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name"><i class="fas fa-share-alt" style="color:#0078d4;"></i> Microsoft 365</div>
+                    <div class="tag-list"><span class="tag">SharePoint Online</span><span class="tag">Teams</span><span class="tag">Exchange</span><span class="tag">Microsoft Graph API</span><span class="tag">Entra ID (SSO, multi-tenant)</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name"><i class="fas fa-cloud" style="color:#3b82f6;"></i> Azure &amp; DevOps</div>
+                    <div class="tag-list"><span class="tag">Azure DevOps YAML pipelines</span><span class="tag">Bicep / AVM</span><span class="tag">App Service</span><span class="tag">Static Web Apps</span><span class="tag">Container Apps</span><span class="tag">Container Registry</span><span class="tag">Azure SQL</span><span class="tag">PostgreSQL</span><span class="tag">Blob Storage</span><span class="tag">Key Vault</span><span class="tag">Managed identities</span><span class="tag">Private endpoints</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name"><i class="fas fa-robot" style="color:#10b981;"></i> AI</div>
+                    <div class="tag-list"><span class="tag">Azure OpenAI</span><span class="tag">Claude on Microsoft Foundry</span><span class="tag">LLM workflows with web search</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name"><i class="fab fa-react" style="color:#61dafb;"></i> Development</div>
+                    <div class="tag-list"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Vite</span><span class="tag">Node.js / Express</span><span class="tag">REST APIs</span><span class="tag">SQL Server</span><span class="tag">MySQL</span><span class="tag">Swift / SwiftUI</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name"><i class="fas fa-terminal" style="color:#eab308;"></i> Scripting</div>
+                    <div class="tag-list"><span class="tag">PowerShell</span><span class="tag">Python</span><span class="tag">AzCopy</span><span class="tag">Bash</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name"><i class="fas fa-shield-alt" style="color:#ef4444;"></i> Infrastructure</div>
+                    <div class="tag-list"><span class="tag">Networking</span><span class="tag">Endpoint security</span><span class="tag">Help desk</span><span class="tag">Incident response</span><span class="tag">Team leadership</span></div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="meta-grid">
+            <section id="education">
+                <h2 class="section-title">Education</h2>
+
+                <div class="edu-card in-progress">
+                    <h3>CII Insurance Qualifications <span class="badge">In progress</span></h3>
+                    <p style="color: var(--accent-green); margin: 0.2rem 0;">Chartered Insurance Institute</p>
+                    <p style="font-size:0.9rem; color: var(--text-muted); margin-top:0.5rem;">Underwriting, claims handling and general insurance fundamentals.</p>
+                </div>
+
+                <div class="edu-card">
+                    <h3>Diploma in Native Mobile App Development</h3>
+                    <p style="color: var(--accent); margin: 0.2rem 0;">NDU DCE Track | Formatech</p>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Graduated 2019</span>
+                    <p style="font-size:0.9rem; color: var(--text-muted); margin-top:0.5rem;">Native mobile development for Android (Java) and iOS (Swift), cross-platform apps with PhoneGap (HTML5), web development (HTML5, JavaScript, jQuery, CSS) and Windows apps in C#.</p>
+                </div>
+
+                <div class="edu-card">
+                    <h3>Certificate in PC Repair and Networking</h3>
+                    <p style="color: var(--accent); margin: 0.2rem 0;">C.IT Dora</p>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Graduated 2015</span>
+                </div>
+            </section>
+
+            <section id="languages">
+                <h2 class="section-title">Languages &amp; Extras</h2>
+                <div class="lang-list">
+                    <div class="lang-item"><span>Arabic</span><strong style="color: var(--accent-green)">Native</strong></div>
+                    <div class="lang-item"><span>English</span><strong style="color: var(--accent)">Fluent</strong></div>
+                    <div class="lang-item"><span>French</span><strong style="color: var(--text-muted)">Good</strong></div>
+                    <div class="lang-item"><span>Spanish</span><strong style="color: #eab308">Beginner</strong></div>
+                </div>
+                <div style="margin-top: 2rem; background: var(--bg-secondary); padding: 1.5rem; border-radius:8px;">
+                    <h4 style="margin-bottom:0.5rem;"><i class="fas fa-heart" style="color: #ef4444;"></i> Hobbies &amp; Interests</h4>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">Gaming, football, photography, technology trends and TV shows.</p>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Charly Resto. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinksContainer = document.getElementById('navLinks');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('open');
+            navLinksContainer.classList.toggle('mobile-active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('open');
+                navLinksContainer.classList.remove('mobile-active');
+            });
+        });
+
+        // Terminal
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalBody = document.getElementById('terminalBody');
+
+        const commands = {
+            help: "Available commands:\n  [about]       - Career profile snapshot\n  [experience]  - Employment history\n  [projects]    - Selected projects\n  [skills]      - Core tool stack\n  [education]   - Education and qualifications\n  [languages]   - Spoken languages\n  [contact]     - Contact details\n  [clear]       - Clear the console",
+            about: "Charly Resto - IT Analyst with 10 years in IT, moving from support and infrastructure leadership into building business software. Power Platform, Azure infrastructure and React/TypeScript web apps for a multi-branch insurance brokerage across the UAE and MENA.",
+            experience: "Employment history:\n  • IT Analyst @ Associated Alliance Insurance (Dubai, remote) | Apr 2025 - Present\n  • Power Platform Developer & IT Administrator @ Arcenciel | Dec 2020 - Apr 2025\n  • IT Support @ Arcenciel | Jan 2016 - Feb 2019",
+            projects: "Selected projects:\n  • User provisioning web app (React/TS, Azure SQL, Entra ID, multi-tenant)\n  • Medical claims portal (React/TS, Node.js, Blob Storage)\n  • AI regulatory news digest (Power Automate + Claude on Foundry, 9 countries)\n  • Azure project scaffolding (PowerShell, Bicep, DevOps pipelines)\n  • Email SLA tracking (Power Automate, Office Scripts, Power BI)\n  • Unified client data search design (9 SQL DBs, D365, Business Central)",
+            skills: "Core stack:\n  • Power Platform: Power Apps, Power Automate, Power BI, DAX, Power Fx\n  • Microsoft 365: SharePoint, Teams, Graph API, Entra ID\n  • Azure: DevOps pipelines, Bicep, App Service, Container Apps, Azure SQL, Key Vault\n  • Dev: React, TypeScript, Node.js/Express, SQL Server, MySQL, Swift\n  • Scripting: PowerShell, Python, AzCopy\n  • AI: Azure OpenAI, Claude on Microsoft Foundry",
+            education: "Education:\n  • CII insurance qualifications (Chartered Insurance Institute) | In progress\n  • Diploma in Native Mobile App Development (NDU DCE Track) | Formatech, 2019\n  • Certificate in PC Repair and Networking | C.IT Dora, 2015",
+            languages: "Languages:\n  • Arabic  - Native\n  • English - Fluent\n  • French  - Good\n  • Spanish - Beginner",
+            contact: "Contact:\n  • Email: charlygresto@hotmail.com\n  • Mobile: +961 70 202 183\n  • Location: Beirut, Lebanon (remote)",
+            clear: ""
+        };
+
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key !== 'Enter') return;
+
+            const rawVal = this.value.trim();
+            const cmd = rawVal.toLowerCase();
+            if (cmd === '') return;
+
+            if (cmd === 'clear') {
+                terminalBody.querySelectorAll('.term-output').forEach(p => p.remove());
+                this.value = '';
+                return;
+            }
+
+            // Echo the typed command (as text, so typed HTML is never executed)
+            const cmdRow = document.createElement('div');
+            cmdRow.className = 'term-output';
+            const promptSpan = document.createElement('span');
+            promptSpan.style.color = 'var(--accent-green)';
+            promptSpan.textContent = 'charly_system~$: ';
+            cmdRow.appendChild(promptSpan);
+            cmdRow.appendChild(document.createTextNode(rawVal));
+
+            const outputRow = document.createElement('div');
+            outputRow.className = 'term-output';
+
+            if (Object.prototype.hasOwnProperty.call(commands, cmd)) {
+                outputRow.textContent = commands[cmd];
+            } else {
+                outputRow.appendChild(document.createTextNode(`Command not found: "${rawVal}". Type `));
+                const helpSpan = document.createElement('span');
+                helpSpan.style.color = 'var(--accent)';
+                helpSpan.textContent = 'help';
+                outputRow.appendChild(helpSpan);
+            }
+
+            const promptLine = terminalBody.querySelector('.term-prompt');
+            terminalBody.insertBefore(cmdRow, promptLine);
+            terminalBody.insertBefore(outputRow, promptLine);
+
+            this.value = '';
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        });
+
+        // Smooth scroll
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetSection = document.querySelector(this.getAttribute('href'));
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scrollspy
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section, header');
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+            sections.forEach(section => {
+                if (scrollPos >= section.offsetTop - 180) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+            });
+        });
+    </script>
+</body>
+</html>
